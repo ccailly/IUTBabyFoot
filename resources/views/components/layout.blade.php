@@ -81,6 +81,7 @@
         </div>
     @endguest
     {{ $slot }}
+    <div class="mt-16"></div>
 </body>
 
 </html>
