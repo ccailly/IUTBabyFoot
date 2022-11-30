@@ -53,7 +53,7 @@
                                         </span>
                                         <div class="font-bold">
                                             <span
-                                                class="text-red-700 {{ $directMatch->match()->red_score > $directMatch->match()->blue_score ? 'animate-text' : '' }}">
+                                                class="text-blue-700 {{ $directMatch->match()->red_score < $directMatch->match()->blue_score ? 'animate-text' : '' }}">
                                                 {{ $directMatch->match()->blue_front_player() != null ? $directMatch->match()->blue_front_player()->username : $directMatch->match()->blue_back_player()->username }}
                                             </span>
                                         </div>
@@ -64,7 +64,7 @@
                                         </span>
                                         <div class="font-bold">
                                             <span
-                                                class="text-red-700 {{ $directMatch->match()->red_score > $directMatch->match()->blue_score ? 'animate-text' : '' }}">
+                                                class="text-blue-700 {{ $directMatch->match()->red_score < $directMatch->match()->blue_score ? 'animate-text' : '' }}">
                                                 {{ $directMatch->match()->blue_back_player() != null ? $directMatch->match()->blue_back_player()->username : $directMatch->match()->blue_front_player()->username }}
                                             </span>
                                         </div>

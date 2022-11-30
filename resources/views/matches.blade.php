@@ -52,7 +52,7 @@
                                             </span>
                                             <div class="font-bold">
                                                 <span
-                                                    class="text-red-700 {{ $match->red_score > $match->blue_score ? 'animate-text' : '' }}">
+                                                    class="text-blue-700 {{ $match->red_score < $match->blue_score ? 'animate-text' : '' }}">
                                                     {{ $match->blue_front_player() != null ? $match->blue_front_player()->username : $match->blue_back_player()->username }}
                                                 </span>
                                             </div>
@@ -63,7 +63,7 @@
                                             </span>
                                             <div class="font-bold">
                                                 <span
-                                                    class="text-red-700 {{ $match->red_score > $match->blue_score ? 'animate-text' : '' }}">
+                                                    class="text-blue-700 {{ $match->red_score < $match->blue_score ? 'animate-text' : '' }}">
                                                     {{ $match->blue_back_player() != null ? $match->blue_back_player()->username : $match->blue_front_player()->username }}
                                                 </span>
                                             </div>
