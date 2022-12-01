@@ -13,7 +13,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($directMatches as $directMatch)
+                @foreach ($directMatches->sortByDesc('created_at') as $directMatch)
                     <tr class="hover hover:cursor-pointer"
                         onclick="window.location.href='{{ route('directmatches.showDirectMatche', $directMatch) }}'">
                         <td>
