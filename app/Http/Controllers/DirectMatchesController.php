@@ -84,12 +84,13 @@ class DirectMatchesController extends Controller
             $status = $directMatch->match()->blue_score > $directMatch->match()->red_score ?
                 'blue' : ($directMatch->match()->red_score > $directMatch->match()->blue_score ? 'red' : 'draw');
 
-            $winnedBets = $directMatch->bets()->where('bet', $status)->get();
-            $coins = $directMatch->bets()->sum('coins');
-            $coins += $coins * .3;
-            foreach ($winnedBets as $winnedBet) {
+            $coinsPool = $directMatch->bets()->sum('coins');
+            $coinsPool *= 1.3;
+            $winnedBets = $directMatch->bets()->where('bet', $status);
+            $winnersPool = $winnedBets->sum('coins');
+            foreach ($winnedBets->get() as $winnedBet) {
                 $user = $winnedBet->player();
-                $user->coins += round($coins / $winnedBets->count());
+                $user->coins += round($coinsPool * ($winnedBet->coins / $winnersPool));
                 $user->save();
             }
         } else if ($request->has('delete')) {

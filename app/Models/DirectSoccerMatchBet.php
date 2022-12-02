@@ -75,7 +75,11 @@ class DirectSoccerMatchBet extends Model
         // Récupère l'issue du match
         $status = $this->match()->red_score > $this->match()->blue_score ? 'red' : ($this->match()->red_score < $this->match()->blue_score ? 'blue' : 'draw');
         if ($status == $this->bet) {
-            return $this->coins * 1.3;
+            $coinsPool = $this->directMatch()->bets()->sum('coins');
+            $coinsPool *= 1.3;
+            $winnedBets = $this->directMatch()->bets()->where('bet', $status);
+            $winnersPool = $winnedBets->sum('coins');
+            return round($coinsPool * ($this->coins / $winnersPool));
         }
 
         return 0;
