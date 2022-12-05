@@ -56,4 +56,10 @@ class User extends Authenticatable
         'mfa_enabled' => 'boolean',
         'refresh_token' => 'encrypted',
     ];
+
+    public function badges($badges = [])
+    {
+        $user_badges = UserBadge::where('user_id', $this->id)->join('badges', 'badges.id', '=', 'user_badges.badge_id')->get();
+        return $user_badges->merge($badges);
+    }
 }
