@@ -149,7 +149,7 @@
                         <td>{{ $bet->match()->red_team_name() }} - {{ $bet->match()->blue_team_name() }}</td>
                         <td>{{ $bet->bet() }}</td>
                         <td>{{ $bet->coins }}</td>
-                        <td>{{ $bet->gain() != null ? $bet->gain() : 'Match en cours' }}</td>
+                        <td>{{ $bet->gain() != null || $bet->gain() == 0 ? $bet->gain() : 'Match en cours' }}</td>
                     </tr>
                 @endforeach
             </tbody>
