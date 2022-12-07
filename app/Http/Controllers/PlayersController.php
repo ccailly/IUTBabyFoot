@@ -11,7 +11,13 @@ class PlayersController extends Controller
 {
     public function showPlayers()
     {
-        $players = Player::all();
+        $players = Player::all()->filter(function ($player) {
+            return $player->matches()->count() > 0;
+        })->sortByDesc(function ($player) {
+            return $player->points();
+        })->sortByDesc(function ($player) {
+            return $player->wins()->count();
+        });
         return view('players', ['players' => $players]);
     }
 

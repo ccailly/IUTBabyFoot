@@ -13,13 +13,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($players->sortBy(
-        function ($value, $key) {
-            return $value->points();
-        },
-        SORT_REGULAR,
-        true,
-    ) as $player)
+                @foreach ($players as $player)
                     <tr class="hover">
                         <td>#{{ $loop->iteration }}</td>
                         <td>
