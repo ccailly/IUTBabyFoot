@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\DirectSoccerMatch;
 use App\Models\SoccerMatch;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class DirectMatchesController extends Controller
@@ -138,7 +139,7 @@ class DirectMatchesController extends Controller
         $validated = $request->validate([
             'bet' => ['required', 'string', 'max:255'],
             'coins' => ['required', 'integer', 'min:1', function ($attribute, $value, $fail) use ($directMatch) {
-                if ($directMatch->started_at != null) {
+                if ($directMatch->started_at != null && Carbon::parse($directMatch->started_at)->diffInSeconds(Carbon::now()) > 60) {
                     $fail('The match has already started');
                 }
                 if ($directMatch->bets()->get()->where('player_id', auth()->id())->count() > 0) {
