@@ -91,8 +91,8 @@ return [
     | This setting allows users to use the application only if they are a member of specific guilds.
     |
     */
-    'guild_only' => false,
-    'guilds' => [],
+    'guild_only' => true,
+    'guilds' => ['1030461324158844968'],
 
     /*
     |--------------------------------------------------------------------------
