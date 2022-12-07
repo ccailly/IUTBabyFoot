@@ -12,7 +12,7 @@ class Player extends User
 
     public function points()
     {
-        return $this->wins()->count() * 3 + $this->draws()->count() - $this->losses()->count() * 3;
+        return max($this->wins()->count() * 3 + $this->draws()->count() - $this->losses()->count() * 2, 0);
     }
 
     public function matches()
