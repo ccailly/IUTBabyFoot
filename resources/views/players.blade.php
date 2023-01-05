@@ -38,7 +38,24 @@
                                     <a class="font-bold"
                                         href="{{ route('players.showPlayer', $player) }}">{{ $player->username }}</a>
                                 </div>
-                            </div>
+                                @foreach ($player->badges() as $badge)
+                                    <label for="my-modal-{{ $loop->iteration }}"
+                                        class="btn text-2xl">{{ $badge->unicode }}</label>
+                                    <input type="checkbox" id="my-modal-{{ $loop->iteration }}" class="modal-toggle" />
+                                    <label for="my-modal-{{ $loop->iteration }}" class="modal cursor-pointer">
+                                        <label class="modal-box relative" for="">
+                                            <h3 class="text-lg font-bold text-center">{{ $badge->display_name }}</h3>
+                                            <h3 class="my-4 text-4xl font-bold text-center">{{ $badge->unicode }}</h3>
+                                            <?php
+                                            $description = $badge->description;
+                                            $description = str_replace('{name}', $player->username, $description);
+                                            $description = str_replace('{total}', $players->count(), $description);
+                                            $description = str_replace('\n', '<br>', $description);
+                                            echo '<p class="my-4 text-center">' . nl2br($description) . '</p>';
+                                            ?>
+                                        </label>
+                                    </label>
+                                @endforeach
                         </td>
                         <td>{{ $player->points() }}</td>
                         <td>{{ $player->coins }}</td>
